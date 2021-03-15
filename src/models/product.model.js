@@ -5,7 +5,7 @@ const productSchema = new Schema({
     title: String,
     price: Number,
     description: String,
-    img: String,
+    imgUrl: String,
     category: {
         type:Schema.Types.ObjectId, ref:'Category'
     }  

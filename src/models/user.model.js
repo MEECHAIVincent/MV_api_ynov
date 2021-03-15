@@ -26,7 +26,8 @@ const userSchema = new Schema({
         unique: true
     },
     tel: {
-        type: Number,
+        type: String,
+        maxlength: 10
     },
     isAdmin: {
         type: Boolean,
