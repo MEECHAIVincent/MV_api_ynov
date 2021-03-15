@@ -12,6 +12,10 @@ exports.create = (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: hashedPassword,
+    adress: req.body.adress,
+    tel: req.body.tel,
+    isAdmin: req.body.isAdmin
+
   });
 
   user
@@ -21,7 +25,7 @@ exports.create = (req, res) => {
         {
           id: data._id,
         },
-        'supersecret',
+        process.env.SECRET_JWT,
         {
           expiresIn: 86400,
         }
@@ -85,7 +89,7 @@ exports.login = (req, res) => {
         {
           id: data._id,
         },
-        'supersecret',
+        process.env.SECRET_JWT,
         {expiresIn: 86400}
       );
 

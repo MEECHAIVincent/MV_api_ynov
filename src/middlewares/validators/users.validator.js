@@ -6,7 +6,11 @@ const userSchemaValidation = (req, res, next) => {
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().email(),
-        password: Joi.string().regex(RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$')).required()
+        password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$')).required(),
+        tel: Joi.number(),
+        adress: Joi.string().required(),
+        isAdmin: Joi.boolean().required()
+        
     });
     
     const validation = userValidationSchema.validate(req.body);
