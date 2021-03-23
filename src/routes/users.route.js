@@ -10,6 +10,8 @@ router.post('/user/create', userSchemaValidation, user.create );
 
 router.post('/users/login', user.login);
 
+router.post('/users/update/:id', user.update);
+
 router.get('/users/:id', verifyToken, user.findOne);
 
 module.exports = router;

@@ -7,9 +7,9 @@ const userSchemaValidation = (req, res, next) => {
         lastName: Joi.string().required(),
         email: Joi.string().email(),
         password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$')).required(),
-        tel: Joi.string(),
-        adress: Joi.string().required(),
-        isAdmin: Joi.boolean().required()
+        telephone: Joi.string(),
+        address: Joi.string().required(),
+        isAdmin: Joi.boolean()
 
     });
     

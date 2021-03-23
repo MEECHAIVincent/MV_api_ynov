@@ -12,8 +12,8 @@ exports.create = (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: hashedPassword,
-    adress: req.body.adress,
-    tel: req.body.tel,
+    address: req.body.address,
+    telephone: req.body.tel,
     isAdmin: req.body.isAdmin
 
   });
@@ -58,6 +58,41 @@ exports.findOne = (req, res) => {
     .catch((err) => res.send(err));
 };
 
+exports.addAdmin = (req, res) => {
+
+    if (req.params.isAdmin = true) {
+
+        let hasedPassword = bcrypt.hashSync(req.body.password, 10);
+        const user = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            address: req.body.address,
+            isAdmin: req.body.isAdmin,
+            email: req.body.email,
+            password: hasedPassword,
+        });
+
+        user.save()
+        .then((data) => {
+            let userToken = jwt.sign({
+                id:data._id
+            }, 'supersecret', { expiresIn: 86400 });
+
+            res.send({
+                token: userToken,
+                auth: true
+            });
+        })
+        .catch((err) => {
+            // console.log(error);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "some error occured while create admin"
+            })
+        })
+    }
+}
+
 exports.login = (req, res) => {
   User.findOne({
     email: req.body.email,
@@ -101,4 +136,24 @@ exports.login = (req, res) => {
     .catch((err) => {
       res.send(err);
     });
+};
+
+exports.update = (req, res) => {
+    User.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            telephone: req.body.telephone,
+            address: req.body.address
+        }
+    )
+    .then((data) => {
+        res.json({
+            message :"Vous avez modifié votre profil",
+            data: data
+        });
+    }).catch((err) => {
+        console.log(err.message);
+    })
 };
