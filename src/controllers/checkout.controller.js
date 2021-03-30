@@ -9,7 +9,7 @@ exports.checkout = async (req, res) => {
         price_data: {
           currency: 'eur',
           product_data: {
-            name: 'T-shirt',
+            name: 'Order',
           },
           unit_amount: req.body.amount,
         },
@@ -17,8 +17,8 @@ exports.checkout = async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'https://example.com/success',
-    cancel_url: 'https://example.com/cancel',
+    success_url: `${process.env.VUE}/success`,
+    cancel_url: `${process.env.VUE}/cancel`,
   });
 
   res.json({ id: session.id });

@@ -27,7 +27,7 @@ const userSchema = new Schema({
     },
     telephone: {
         type: String,
-        maxlength: 10
+        maxlength: 12
     },
     isAdmin: {
         type: Boolean,
