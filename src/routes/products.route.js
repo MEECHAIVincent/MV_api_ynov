@@ -6,7 +6,12 @@ const product = require('../controllers/products.controller');
 router.post('/products' ,product.create); 
 // Sans authorisation:
 router.get('/products/', product.getProducts);
-router.get('/products/:id', product.getProduct);
+
+router.get('/product/:id', product.getProduct);
+
+router.post('/product/update/:id', product.updateProduct);
+
+router.get('/product/delete/:id', product.deleteProduct);
 
 
 module.exports = router;

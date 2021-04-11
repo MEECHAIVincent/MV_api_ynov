@@ -4,14 +4,18 @@ const user = require('../controllers/users.controller');
 const verifyToken = require('../middlewares/verifyToken');
 const userSchemaValidation = require('../middlewares/validators/users.validator');
 
-router.post('/users', userSchemaValidation ,user.create);
+router.post('/user', userSchemaValidation ,user.create);
 
-router.post('/user/create', userSchemaValidation, user.create );
+router.post('/user/create', userSchemaValidation, user.addAdmin );
 
-router.post('/users/login', user.login);
+router.post('/user/login', user.login);
 
-router.post('/users/update/:id', user.update);
+router.post('/user/update/:id', user.updateUser);
 
-router.get('/users/:id', verifyToken, user.findOne);
+router.get('/user/:id', verifyToken, user.findOne);
+
+router.get('/users', user.findAll);
+
+router.get('/users/remove/:id', user.deleteUser)
 
 module.exports = router;

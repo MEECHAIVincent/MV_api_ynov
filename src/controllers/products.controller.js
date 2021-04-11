@@ -61,3 +61,37 @@ exports.getProducts = (req, res) => {
     .catch((err) => res.send(err));
 };
 
+exports.updateProduct = (req, res) => {
+  Product.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+          title: req.body.title,
+          price: req.body.price,
+          description: req.body.description,
+          image: req.body.image,
+          category: req.body.category,
+      }
+  )
+  .then((data) => {
+      res.json({
+          message :" produit modifier",
+          data: data
+      });
+  }).catch((err) => {
+      console.log(err.message);
+  })
+};
+
+exports.deleteProduct = (req, res) => {
+  Product.findByIdAndRemove(req.params.id)
+  .then((data) => {
+      // if (!data) {
+      //     res.status(404).send({
+      //         message: `Product with id ${req.params.id} not found`
+      //     })
+      // }
+      res.send(data);
+  })
+  .catch((err) =>    res.send(err));
+};
+

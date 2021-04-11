@@ -58,6 +58,20 @@ exports.findOne = (req, res) => {
     .catch((err) => res.send(err));
 };
 
+exports.findAll = (req, res) => {
+  User.find()
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `User with id ${req.params.id} not found`,
+          // message:"User with id" + req.params.id +"not found"
+        });
+      }
+      res.send(data);
+    })
+    .catch((err) => res.send(err));
+};
+
 exports.addAdmin = (req, res) => {
 
     if (req.params.isAdmin = true) {
@@ -138,7 +152,7 @@ exports.login = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
+exports.updateUser = (req, res) => {
     User.findOneAndUpdate(
         { _id: req.params.id },
         {
@@ -156,4 +170,17 @@ exports.update = (req, res) => {
     }).catch((err) => {
         console.log(err.message);
     })
+};
+
+exports.deleteUser = (req, res) => {
+  User.findByIdAndRemove(req.params.id)
+  .then((data) => {
+      // if (!data) {
+      //     res.status(404).send({
+      //         message: `Product with id ${req.params.id} not found`
+      //     })
+      // }
+      res.send(data);
+  })
+  .catch((err) => res.send(err));
 };
