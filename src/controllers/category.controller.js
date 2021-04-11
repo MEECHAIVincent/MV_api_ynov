@@ -41,3 +41,33 @@ exports.getCategorys = (req, res) => {
     .catch((err) => res.send(err));
 };
 
+exports.updateCategory = (req, res) => {
+  Category.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+          title: req.body.title,
+      }
+  )
+  .then((data) => {
+      res.json({
+          message :" Category modifier",
+          data: data
+      });
+  }).catch((err) => {
+      console.log(err.message);
+  })
+};
+
+exports.deleteCategory = (req, res) => {
+  Category.findByIdAndRemove(req.params.id)
+  .then((data) => {
+      // if (!data) {
+      //     res.status(404).send({
+      //         message: `Product with id ${req.params.id} not found`
+      //     })
+      // }
+      res.send(data);
+  })
+  .catch((err) =>    res.send(err));
+};
+

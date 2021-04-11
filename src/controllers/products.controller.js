@@ -69,7 +69,6 @@ exports.updateProduct = (req, res) => {
           price: req.body.price,
           description: req.body.description,
           image: req.body.image,
-          category: req.body.category,
       }
   )
   .then((data) => {

@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
     total: Number,
+    status: {
+        type: String,
+        default: "En Cours",
+    },
     user: {
         type: Schema.Types.ObjectId,ref:'User'
     },
