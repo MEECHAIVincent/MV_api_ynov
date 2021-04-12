@@ -4,4 +4,4 @@ MEECHAI Vincent
 
 
 
-lien vers le site de prod :
+lien vers le site de prod : https://mv-api-ynov.herokuapp.com
